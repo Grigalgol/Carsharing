@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+
+    <title>Login Form</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 col-sm-7 col-md-6 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div th:if="${param.success}">
+                            <div class="alert alert-info">Вы успешно зарегистрировались</div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h3 class="mb-5">Регистрация</h3>
+                        </div>
+                        <form  action="#" th:action="@{/registration/save}" th:object="${user}"
+                               method="POST">
+                            <input type="text" th:field="*{phone}"
+                                   style="margin-top: 10px;" placeholder="Телефон" class="form-control">
+                            <input type="text" th:field="*{firstName}"
+                                   style="margin-top: 10px;" placeholder="Имя" class="form-control">
+                            <input type="text" th:field="*{lastName}"
+                                   style="margin-top: 10px;" placeholder="Фамилия" class="form-control">
+                            <input type="text" th:field="*{passwordSeries}"
+                                   style="margin-top: 10px;" placeholder="Серия паспорта" class="form-control">
+                            <input type="text" th:field="*{passwordNumber}"
+                                   style="margin-top: 10px;" placeholder="Номер паспорта" class="form-control">
+                            <input type="password" th:field="*{password}"
+                                   style="margin-top: 10px;" placeholder="Пароль" class="form-control">
+                            <div class="text-center mt-3">
+                                <button class="btn btn-primary">Зарегистрироваться</button>
+                            </div>
+                        </form>
+                        <a th:href="@{/login}">Sigh in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
