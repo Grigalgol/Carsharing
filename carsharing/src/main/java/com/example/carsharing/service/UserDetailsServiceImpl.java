@@ -1,8 +1,8 @@
 package com.example.carsharing.service;
 
-import com.example.carsharing.models.Client;
+import com.example.carsharing.models.User;
 import com.example.carsharing.models.Role;
-import com.example.carsharing.repository.ClientRepository;
+import com.example.carsharing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final ClientRepository clientRepository;
+    private final UserRepository clientRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(ClientRepository clientRepository) {
+    public UserDetailsServiceImpl(UserRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Client user = clientRepository.findByPhone(username);
+        User user = clientRepository.findByPhone(username);
         if(user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }

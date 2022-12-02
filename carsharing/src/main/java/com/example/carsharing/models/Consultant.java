@@ -7,25 +7,26 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "clients", uniqueConstraints = @UniqueConstraint(columnNames = "phone"))
+@Table(name = "consultants")
 @Data
 @NoArgsConstructor
-public class Client {
+public class Consultant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String phone;
     private String firstName;
     private String lastName;
     private String passportData;
+    private String employmentContract;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL)
-    List<Orders> orders;
-
-    public Client(String phone, String firstName, String lastName, String passportData) {
-        this.phone = phone;
+    public Consultant(String firstName, String lastName, String passportData, String employmentContract) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passportData = passportData;
+        this.employmentContract = employmentContract;
     }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "consultant", cascade = CascadeType.ALL)
+    List<Orders> orders;
 }
