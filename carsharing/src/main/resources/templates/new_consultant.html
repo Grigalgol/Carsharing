@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="ISO-8859-1">
-  <title>Обновить Технического Специалиста</title>
+  <title>Создать консультанта</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
   <link rel="stylesheet"
@@ -37,14 +37,13 @@
         <div class="card border-0 shadow">
           <div class="card-body">
             <div th:if="${param.success}">
-              <div class="alert alert-info">Спецалист успешно обновлен!</div>
+              <div class="alert alert-info">Консультант успешно добавлен!</div>
             </div>
             <div class="text-center mt-3">
-              <h3 class="mb-5">Обновить Специалиста</h3>
+              <h3 class="mb-5">Добавить Консультанта</h3>
             </div>
-            <form action="#" th:action="@{/techSpecialist/update}" th:object="${specilist}"
+            <form action="#" th:action="@{/consultant/save}" th:object="${consultant}"
                   method="POST">
-              <input type="hidden" th:field="*{id}" />
               <input type="text" th:field="*{firstName}"
                      style="margin-top: 10px;" placeholder="Имя" class="form-control">
               <input type="text" th:field="*{lastName}"
@@ -65,7 +64,7 @@
     </div>
     <hr>
 
-    <a th:href="@{/techSpecialist}" class="text-center text-primary"> Вернуться назад</a>
+    <a th:href="@{/consultant}" class="text-center text-primary"> Вернуться назад</a>
   </div>
 </section>
 <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -32,9 +32,9 @@
                             <input type="text" th:field="*{lastName}"
                                    style="margin-top: 10px;" placeholder="Фамилия" class="form-control">
                             <input type="text" th:field="*{passwordSeries}"
-                                   style="margin-top: 10px;" placeholder="Серия паспорта" class="form-control">
+                                   style="margin-top: 10px;" placeholder="Серия паспорта" minlength="4" maxlength="4" class="form-control">
                             <input type="text" th:field="*{passwordNumber}"
-                                   style="margin-top: 10px;" placeholder="Номер паспорта" class="form-control">
+                                   style="margin-top: 10px;" placeholder="Номер паспорта" minlength="6" maxlength="6" class="form-control">
                             <input type="password" th:field="*{password}"
                                    style="margin-top: 10px;" placeholder="Пароль" class="form-control">
                             <div class="text-center mt-3">
