@@ -19,7 +19,7 @@ public class Client {
     private String lastName;
     private String passportData;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.REMOVE)
     List<Orders> orders;
 
     public Client(String phone, String firstName, String lastName, String passportData) {

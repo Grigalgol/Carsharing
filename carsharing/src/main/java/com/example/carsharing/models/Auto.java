@@ -26,6 +26,6 @@ public class Auto {
         this.typeAuto = typeAuto;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "auto", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "auto", cascade = CascadeType.REMOVE)
     List<Orders> orders;
 }

@@ -1,8 +1,6 @@
 package com.example.carsharing.controller;
 
-import com.example.carsharing.dto.EmployeeDto;
 import com.example.carsharing.dto.TypeAutoDto;
-import com.example.carsharing.models.Consultant;
 import com.example.carsharing.models.TypeAuto;
 import com.example.carsharing.service.TypeAutoService;
 import org.springframework.stereotype.Controller;

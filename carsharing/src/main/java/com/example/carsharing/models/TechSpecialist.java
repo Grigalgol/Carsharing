@@ -25,6 +25,6 @@ public class TechSpecialist {
         this.passportData = passportData;
         this.employmentContract = employmentContract;
     }
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "techSpecialist", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "techSpecialist", cascade = CascadeType.REMOVE)
     List<Orders> orders;
 }

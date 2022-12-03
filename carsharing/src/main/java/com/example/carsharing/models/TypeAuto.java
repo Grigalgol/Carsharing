@@ -22,6 +22,6 @@ public class TypeAuto {
         this.engineType = engineType;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "typeAuto", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "typeAuto", cascade = CascadeType.REMOVE)
     List<Auto> auto;
 }

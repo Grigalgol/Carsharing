@@ -27,6 +27,6 @@ public class Consultant {
         this.employmentContract = employmentContract;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "consultant", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "consultant", cascade = CascadeType.REMOVE)
     List<Orders> orders;
 }
