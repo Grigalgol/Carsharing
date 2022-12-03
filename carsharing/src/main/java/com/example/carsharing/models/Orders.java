@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "orders")
@@ -37,5 +38,9 @@ public class Orders {
         this.consultant = consultant;
         this.client = client;
         this.techSpecialist = techSpecialist;
+    }
+
+    public boolean isDateReturnEmpty() {
+        return dateReturn == null;
     }
 }

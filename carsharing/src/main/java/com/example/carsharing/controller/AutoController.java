@@ -50,7 +50,7 @@ public class AutoController {
     @GetMapping("/showFormForUpdate/{id}")
     public String showUpdateForm(@PathVariable(value = "id") long id, Model model) {
         Auto auto = autoService.findById(id);
-        AutoDto autoDto = new AutoDto(auto.getId(), auto.getColor(), auto.getMark(), auto.getTypeAuto().getId());
+        AutoDto autoDto = new AutoDto(auto.getId(), auto.getColor(), auto.getMark(), auto.getTypeAuto().getId(), auto.getNumber());
         model.addAttribute("auto", autoDto);
         model.addAttribute("list", typeAutoService.getAll());
         return "update_auto";
@@ -61,4 +61,5 @@ public class AutoController {
         autoService.update(autoDto);
         return "redirect:/auto/showFormForUpdate/" + autoDto.getId() + "?success";
     }
+
 }

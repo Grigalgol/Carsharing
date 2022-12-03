@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AutoService {
@@ -22,7 +23,7 @@ public class AutoService {
     }
 
     public Auto save(AutoDto autoDto) {
-        Auto auto = new Auto(autoDto.getColor(), autoDto.getMark(), typeAutoRepository.findById(autoDto.getTypeAuto()).get());
+        Auto auto = new Auto(autoDto.getColor(), autoDto.getMark(), typeAutoRepository.findById(autoDto.getTypeAuto()).get(), autoDto.getNumber());
         return autoRepository.save(auto);
     }
 
@@ -39,8 +40,11 @@ public class AutoService {
     }
 
     public Auto update(AutoDto autoDto) {
-        Auto auto = new Auto(autoDto.getColor(), autoDto.getMark(), typeAutoRepository.findById(autoDto.getTypeAuto()).get());
+        Auto auto = new Auto(autoDto.getColor(), autoDto.getMark(), typeAutoRepository.findById(autoDto.getTypeAuto()).get(), autoDto.getNumber());
         auto.setId(autoDto.getId());
         return autoRepository.save(auto);
+    }
+    public List<Auto> getAllFreeAuto() {
+        return autoRepository.findAll().stream().filter(a -> a.getStatus().equals("free")).collect(Collectors.toList());
     }
 }

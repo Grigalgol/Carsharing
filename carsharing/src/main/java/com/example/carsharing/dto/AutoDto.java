@@ -13,4 +13,5 @@ public class AutoDto {
     private String color;
     private String mark;
     private Long typeAuto;
+    private String number;
 }

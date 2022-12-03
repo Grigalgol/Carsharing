@@ -48,6 +48,8 @@
                      style="margin-top: 10px;" placeholder="Марка" class="form-control">
               <input type="text" th:field="*{color}"
                      style="margin-top: 10px;" placeholder="Цвет" class="form-control">
+              <input type="text" th:field="*{number}"
+                     style="margin-top: 10px;" placeholder="Номер" class="form-control">
               <select style="margin-top: 10px;" th:field="*{typeAuto}" class="form-select"  aria-label="Default select example" >
                 <option th:each="i : ${list}" th:value="${i.id}" th:text="${'Тип топлива - ' + i.fuelType + '. Тип двигателя - ' + i.engineType + '.'}">
                 </option>

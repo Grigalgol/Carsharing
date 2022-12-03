@@ -29,4 +29,8 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
+    public Client findByPhone(String phone) {
+        return clientRepository.findByPhone(phone);
+    }
+
 }

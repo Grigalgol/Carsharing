@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="ISO-8859-1">
-  <title>Автомобили</title>
+  <title>Взять автомобиль в аренду</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -36,10 +36,8 @@
 
 
 <div class="container my-2">
-  <h1 class="text-center">Список Автомобилей</h1>
+  <h1 class="text-center">Список Доступных Автомобилей</h1>
   <hr>
-
-  <a th:href="@{/auto/showNewAutoForm}" class="btn btn-primary btn-sm mb-3"> Добавить автомобиль</a>
 
   <table border="1" class="table table-striped table-responsive-md">
     <thead>
@@ -59,8 +57,7 @@
       <td th:text="${a.number}"></td>
       <td th:text="${a.typeAuto.engineType}"></td>
       <td th:text="${a.typeAuto.fuelType}"></td>
-      <td><a th:href="@{/auto/showFormForUpdate/{id}(id=${a.id})}" class="btn btn-primary">Обновить</a>
-        <a th:href="@{/auto/delete/{id}(id=${a.id})}" class="btn btn-danger">Удалить</a>
+      <td><a th:href="@{/newOrder/{id}(id=${a.id})}" class="btn btn-primary">Взять в аренду</a>
       </td>
     </tr>
     </tbody>
