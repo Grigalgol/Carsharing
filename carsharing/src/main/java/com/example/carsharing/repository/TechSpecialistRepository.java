@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TechSpecialistRepository extends JpaRepository<TechSpecialist, Long> {
+    TechSpecialist findById(long id);
 }
