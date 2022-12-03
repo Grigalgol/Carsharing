@@ -44,7 +44,7 @@ public class TechSpecialistController {
     }
 
     @GetMapping("/showFormForUpdate/{id}")
-    public String showNewTechSpecialistForm(@PathVariable(value = "id") long id, Model model) {
+    public String showUpdateForm(@PathVariable(value = "id") long id, Model model) {
         TechSpecialist techSpecialist = techSpecialistService.findById(id);
         EmployeeDto employeeDto = new EmployeeDto(
                 techSpecialist.getId(),

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="ISO-8859-1">
-  <title>Консультанты</title>
+  <title>Типы автомобилей</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -36,29 +36,25 @@
 
 
 <div class="container my-2">
-  <h1 class="text-center">Список Консультантов</h1>
+  <h1 class="text-center">Список Типов Автомобилей</h1>
   <hr>
 
-  <a th:href="@{/consultant/showNewConsultantForm}" class="btn btn-primary btn-sm mb-3"> Добавить консультанта</a>
+  <a th:href="@{/typeAuto/showNewTypeAutoForm}" class="btn btn-primary btn-sm mb-3"> Добавить тип автомобиля</a>
 
   <table border="1" class="table table-striped table-responsive-md">
     <thead>
     <tr>
-      <th>Имя</th>
-      <th>Фамилия</th>
-      <th>Паспортные данные</th>
-      <th>Номер договора</th>
+      <th>Тим топлива</th>
+      <th>Тип мотора</th>
       <th>Действия</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="consultant : ${list}">
-      <td th:text="${consultant.firstName}"></td>
-      <td th:text="${consultant.lastName}"></td>
-      <td th:text="${consultant.passportData}"></td>
-      <td th:text="${consultant.employmentContract}"></td>
-      <td><a th:href="@{/consultant/showFormForUpdate/{id}(id=${consultant.id})}" class="btn btn-primary">Обновить</a>
-        <a th:href="@{/consultant/delete/{id}(id=${consultant.id})}" class="btn btn-danger">Удалить</a>
+    <tr th:each="typeAuto : ${list}">
+      <td th:text="${typeAuto.fuelType}"></td>
+      <td th:text="${typeAuto.engineType}"></td>
+      <td><a th:href="@{/typeAuto/showFormForUpdate/{id}(id=${typeAuto.id})}" class="btn btn-primary">Обновить</a>
+        <a th:href="@{/typeAuto/delete/{id}(id=${typeAuto.id})}" class="btn btn-danger">Удалить</a>
       </td>
     </tr>
     </tbody>

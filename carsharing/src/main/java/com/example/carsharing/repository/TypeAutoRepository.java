@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TypeAutoSpecialist extends JpaRepository<TypeAuto, Long> {
+public interface TypeAutoRepository extends JpaRepository<TypeAuto, Long> {
+    TypeAuto findById(long id);
 }
