@@ -55,6 +55,10 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public List<Orders> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
     public void endOrder(long id) {
         Orders order = orderRepository.findOrdersById(id);
         Auto auto = order.getAuto();

@@ -8,6 +8,8 @@ import com.example.carsharing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
@@ -44,6 +46,10 @@ public class ClientService {
         user.setPassportData(userDto.getPasswordSeries()+userDto.getPasswordNumber());
         userRepository.save(user);
         return clientRepository.save(client);
+    }
+
+    public List<Client> getAll() {
+        return clientRepository.findAll();
     }
 
 }
