@@ -2,12 +2,16 @@ package com.example.carsharing.controller;
 
 import com.example.carsharing.dto.AutoDto;
 import com.example.carsharing.models.Auto;
+import com.example.carsharing.models.TypeAuto;
 import com.example.carsharing.service.AutoService;
 import com.example.carsharing.service.TypeAutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/auto")
@@ -24,8 +28,7 @@ public class AutoController {
 
     @GetMapping
     public String showAutoPage(Model model) {
-        model.addAttribute("list", autoService.getAll());
-        return "auto";
+        return findPaginated(1, model);
     }
 
     @GetMapping("/showNewAutoForm")
@@ -60,6 +63,22 @@ public class AutoController {
     public String update(@ModelAttribute(value = "auto") AutoDto autoDto) {
         autoService.update(autoDto);
         return "redirect:/auto/showFormForUpdate/" + autoDto.getId() + "?success";
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<Auto> page = autoService.findPaginated(pageNo, pageSize);
+        List<Auto> list = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("list", list);
+        return "auto";
     }
 
 }

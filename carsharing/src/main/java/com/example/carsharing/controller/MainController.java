@@ -1,5 +1,6 @@
 package com.example.carsharing.controller;
 
+import com.example.carsharing.dto.AutoDto;
 import com.example.carsharing.dto.OrderDto;
 import com.example.carsharing.dto.UserDto;
 import com.example.carsharing.models.Auto;
@@ -7,6 +8,7 @@ import com.example.carsharing.models.Client;
 import com.example.carsharing.models.Consultant;
 import com.example.carsharing.models.TechSpecialist;
 import com.example.carsharing.service.*;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,12 @@ public class MainController {
     @GetMapping("/getAuto")
     public String getAuto(Model model) {
         model.addAttribute("list", autoService.getAllFreeAuto());
+        return "get_auto";
+    }
+
+    @PostMapping("/find")
+    public String getFindAutoPage(@ModelAttribute(value = "auto") AutoDto autoDto, Model model) {
+        model.addAttribute("list", autoService.getAllFreeFindAuto(autoDto));
         return "get_auto";
     }
 
@@ -106,5 +114,11 @@ public class MainController {
     public String updateClient(@ModelAttribute(value = "client") UserDto userDto) {
         clientService.updateClient(userDto);
         return "redirect:/updateForm?success";
+    }
+
+    @GetMapping("/findAutoForm")
+    public String findAutoForm(Model model) {
+        model.addAttribute("auto", new AutoDto());
+        return "find_auto";
     }
 }

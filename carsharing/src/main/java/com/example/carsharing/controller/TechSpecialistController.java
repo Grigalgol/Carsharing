@@ -4,9 +4,12 @@ import com.example.carsharing.dto.EmployeeDto;
 import com.example.carsharing.models.TechSpecialist;
 import com.example.carsharing.service.TechSpecialistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/techSpecialist")
@@ -21,8 +24,7 @@ public class TechSpecialistController {
 
     @GetMapping
     public String showTechSpecialistPage(Model model) {
-        model.addAttribute("list", techSpecialistService.getAll());
-        return "techSpecialist";
+        return findPaginated(1, model);
     }
 
     @GetMapping("/showNewTechSpecialistForm")
@@ -62,5 +64,21 @@ public class TechSpecialistController {
     public String update(@ModelAttribute(value = "specialist") EmployeeDto employeeDto) {
         techSpecialistService.update(employeeDto);
         return "redirect:/techSpecialist/showFormForUpdate/" + employeeDto.getId() + "?success";
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<TechSpecialist> page = techSpecialistService.findPaginated(pageNo, pageSize);
+        List<TechSpecialist> listEmployees = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("list", listEmployees);
+        return "techSpecialist";
     }
 }

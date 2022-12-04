@@ -2,7 +2,11 @@ package com.example.carsharing.service;
 
 import com.example.carsharing.dto.EmployeeDto;
 import com.example.carsharing.models.Consultant;
+import com.example.carsharing.models.TechSpecialist;
 import com.example.carsharing.repository.ConsultantRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,5 +50,9 @@ public class ConsultantService {
         );
         consultant.setId(employeeDto.getId());
         return consultantRepository.save(consultant);
+    }
+    public Page<Consultant> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.consultantRepository.findAll(pageable);
     }
 }

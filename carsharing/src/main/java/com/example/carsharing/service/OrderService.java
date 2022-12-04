@@ -2,9 +2,13 @@ package com.example.carsharing.service;
 
 import com.example.carsharing.dto.OrderDto;
 import com.example.carsharing.models.Auto;
+import com.example.carsharing.models.Client;
 import com.example.carsharing.models.Orders;
 import com.example.carsharing.repository.AutoRepository;
 import com.example.carsharing.repository.OrderRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -57,6 +61,11 @@ public class OrderService {
 
     public List<Orders> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    public Page<Orders> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.orderRepository.findAll(pageable);
     }
 
     public void endOrder(long id) {

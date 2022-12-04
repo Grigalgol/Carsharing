@@ -2,9 +2,13 @@ package com.example.carsharing.service;
 
 import com.example.carsharing.dto.AutoDto;
 import com.example.carsharing.models.Auto;
+import com.example.carsharing.models.Consultant;
 import com.example.carsharing.repository.AutoRepository;
 import com.example.carsharing.repository.TypeAutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,4 +51,20 @@ public class AutoService {
     public List<Auto> getAllFreeAuto() {
         return autoRepository.findAll().stream().filter(a -> a.getStatus().equals("free")).collect(Collectors.toList());
     }
+
+    public List<Auto> getAllFreeFindAuto(AutoDto autoDto) {
+        return autoRepository
+                .findAll()
+                .stream()
+                .filter(a -> a.getStatus().equals("free"))
+                .filter(a -> a.getMark().equals(autoDto.getMark()))
+                .filter(a -> a.getColor().equals(autoDto.getColor()))
+                .collect(Collectors.toList());
+    }
+
+    public Page<Auto> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.autoRepository.findAll(pageable);
+    }
+
 }

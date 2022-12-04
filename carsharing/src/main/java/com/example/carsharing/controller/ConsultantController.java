@@ -4,9 +4,12 @@ import com.example.carsharing.dto.EmployeeDto;
 import com.example.carsharing.models.Consultant;
 import com.example.carsharing.service.ConsultantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/consultant")
@@ -20,8 +23,7 @@ public class ConsultantController {
 
     @GetMapping
     public String showConsultantPage(Model model) {
-        model.addAttribute("list", consultantService.getAll());
-        return "consultant";
+        return findPaginated(1, model);
     }
 
     @GetMapping("/showNewConsultantForm")
@@ -61,5 +63,21 @@ public class ConsultantController {
     public String update(@ModelAttribute(value = "consultant") EmployeeDto employeeDto) {
         consultantService.update(employeeDto);
         return "redirect:/consultant/showFormForUpdate/" + employeeDto.getId() + "?success";
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<Consultant> page = consultantService.findPaginated(pageNo, pageSize);
+        List<Consultant> listEmployees = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("list", listEmployees);
+        return "consultant";
     }
 }

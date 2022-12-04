@@ -1,9 +1,13 @@
 package com.example.carsharing.service;
 
 import com.example.carsharing.dto.TypeAutoDto;
+import com.example.carsharing.models.TechSpecialist;
 import com.example.carsharing.models.TypeAuto;
 import com.example.carsharing.repository.TypeAutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +42,10 @@ public class TypeAutoService {
         TypeAuto typeAuto = new TypeAuto(typeAutoDto.getFuelType(), typeAutoDto.getEngineType());
         typeAuto.setId(typeAutoDto.getId());
         return typeAutoRepository.save(typeAuto);
+    }
+
+    public Page<TypeAuto> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.typeAutoRepository.findAll(pageable);
     }
 }
