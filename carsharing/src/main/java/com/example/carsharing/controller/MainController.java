@@ -1,6 +1,7 @@
 package com.example.carsharing.controller;
 
 import com.example.carsharing.dto.OrderDto;
+import com.example.carsharing.dto.UserDto;
 import com.example.carsharing.models.Auto;
 import com.example.carsharing.models.Client;
 import com.example.carsharing.models.Consultant;
@@ -11,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Random;
@@ -81,5 +84,27 @@ public class MainController {
         String phone = authentication.getName();
         model.addAttribute("list", orderService.getAllEndOrdersByClient(phone));
         return "endedOrders";
+    }
+
+    @GetMapping("/updateForm")
+    public String showFormForClientUpdate(Model model) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        String phone = authentication.getName();
+        Client client = clientService.findByPhone(phone);
+        UserDto userDto = new UserDto(
+                client.getFirstName(),
+                client.getLastName(),
+                client.getPassportData().substring(0, 4),
+                client.getPassportData().substring(4)
+        );
+        userDto.setPhone(phone);
+        model.addAttribute("client", userDto);
+        return "update_client";
+    }
+
+    @PostMapping("/update")
+    public String updateClient(@ModelAttribute(value = "client") UserDto userDto) {
+        clientService.updateClient(userDto);
+        return "redirect:/updateForm?success";
     }
 }
